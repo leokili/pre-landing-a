@@ -154,4 +154,69 @@
     </header>
 
     <main>
-        <h1 class="manifesto-title">La información correcta en
+        <h1 class="manifesto-title">La información correcta en el momento exacto <em>lo cambia todo.</em></h1>
+        
+        <p class="manifesto-text">
+            En la economía actual, el recurso más valioso no es el capital, es el conocimiento estructurado y distribuido de forma inteligente.
+        </p>
+        <p class="manifesto-text">
+            Documentamos, analizamos y compartimos las estrategias silenciosas que están permitiendo a profesionales de todo el mundo transformar su experiencia en verdadera independencia.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="dynamic-tagline">
+            <span id="typewriter"></span><span class="cursor"></span>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <span id="current-year"></span> Noticias del Éxito Online. Curaduría de información estratégica.
+    </footer>
+
+    <script>
+        // 1. Poner el año actual automáticamente en el pie de página
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 2. Efecto minimalista de máquina de escribir para la frase final
+        const phrases = [
+            "Bienvenido a la nueva economía.",
+            "Tu conocimiento tiene valor.",
+            "El éxito deja pistas."
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typingSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typingSpeed = 2500; // Pausa larga al terminar la frase
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 500; // Pausa antes de la nueva frase
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        // Iniciar el efecto después de que terminen las animaciones CSS
+        setTimeout(typeEffect, 1200);
+    </script>
+</body>
+</html>
